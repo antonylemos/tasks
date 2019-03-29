@@ -7,7 +7,8 @@ import {
   Modal,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Alert
+  Alert,
+  DatePickerAndroid
 } from 'react-native'
 import moment from 'moment'
 
@@ -31,6 +32,20 @@ export default class AddTask extends Component {
     this.setState({ ...initialState })
   }
 
+  handleDateAndroidChanged = () => {
+    DatePickerAndroid.open({
+      date: this.state.date
+    }).then(e => {
+      if (e.action !== DatePickerAndroid.dismissedAction) {
+        const momentDate = moment(this.state.date)
+        momentDate.date(e.day)
+        momentDate.month(e.month)
+        momentDate.year(e.year)
+        this.setState({ date: momentDate.toDate() })
+      }
+    })
+  }
+
   render() {
     return (
       <Modal
@@ -50,6 +65,9 @@ export default class AddTask extends Component {
             onChangeText={desc => this.setState({ desc })}
             value={this.state.desc}
           />
+          <TouchableOpacity onPress={this.handleDateAndroidChanged}>
+            <Text style={styles.date}>{moment(this.state.date).format('ddd, D [de] MMMM [de] YYYY')}</Text>
+          </TouchableOpacity>
           <View style={styles.buttonGroup}>
             <TouchableOpacity onPress={this.props.onCancel}>
               <Text style={styles.button}>Cancelar</Text>

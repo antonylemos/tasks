@@ -35,6 +35,13 @@ const styles = StyleSheet.create({
     borderColor: '#e3e3e3',
     borderRadius: 6
   },
+  date: {
+    fontFamily: commonStyles.fontFamily,
+    fontSize: 20,
+    marginLeft: 10,
+    marginTop: 10,
+    textAlign: 'center'
+  },
   buttonGroup: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
