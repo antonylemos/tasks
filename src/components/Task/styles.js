@@ -38,6 +38,19 @@ const styles = StyleSheet.create({
     fontFamily: commonStyles.fontFamily,
     color: commonStyles.colors.subText,
     fontSize: 12
+  },
+  exclude: {
+    flex: 1,
+    backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  excludeText: {
+    fontFamily: commonStyles.fontFamily,
+    color: 'white',
+    fontSize: 20,
+    margin: 10
   }
 })
 
