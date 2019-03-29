@@ -11,8 +11,10 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import moment from 'moment'
 import 'moment/locale/pt-br'
+import ActionButton from 'react-native-action-button'
 
 import Task from '../../components/Task'
+import AddTask from '../AddTask'
 
 import styles from './styles'
 
@@ -97,6 +99,18 @@ export default class Agenda extends Component {
     ],
     visibleTasks: [],
     showDoneTasks: true,
+    showAddTask: false,
+  }
+
+  addTask = task => {
+    const tasks = [...this.state.tasks]
+    tasks.push({
+      id: Math.random(),
+      desc: task.desc,
+      estimateAt: task.date,
+      doneAt: null
+    })
+    this.setState({ tasks, showAddTask: false }, this.filterTasks)
   }
 
   filterTasks = () => {
@@ -135,6 +149,11 @@ export default class Agenda extends Component {
         <StatusBar
           backgroundColor={commonStyles.colors.today}
         />
+        <AddTask
+          isVisible={this.state.showAddTask}
+          onSave={this.addTask}
+          onCancel={() => this.setState({ showAddTask: false })}
+        />
         <ImageBackground
           source={todayImage}
           style={styles.background}
@@ -160,6 +179,10 @@ export default class Agenda extends Component {
             renderItem={({ item }) => <Task {...item} toggleTask={this.toggleTask} />}
           />
         </View>
+        <ActionButton
+          buttonColor={commonStyles.colors.today}
+          onPress={() => { this.setState({ showAddTask: true }) }}
+        />
       </View>
     )
   }
