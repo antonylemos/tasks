@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: 20,
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
   }
 })
 
